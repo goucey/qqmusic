@@ -1,0 +1,36 @@
+@base-bgColor: rgb(224,224,224);
+@base-borderColor: rgba(255,255,255,.3);
+@base-fColor: rgba(224,224,224,.8);
+@input-bgColor: rgba(255,255,255,0);
+@current-color: rgba(255,255,255,1);
+@songInfo-fColor: rgba(224,224,224,.5);
+@bg-markColor: rgba(0,0,0,.35);
+
+@playList-bgColor:rgba(54, 54, 54, 0.9);
+@playListBtn-bgColor:rgba(99, 99, 99, 0.5);
+
+@progress-baseColor: rgba(255,255,255,.1);
+@progress-loadColor: rgba(255,255,255,.2);
+@progress-playColor: rgba(255,255,255,.7);
+@progress-ballColor: rgba(255,255,255,.9);
+
+.icon-image(@img,@x,@y) {
+  background-image: url('../../assets/@{img}');
+  background-position: @x @y;
+  background-repeat: no-repeat;
+  // background-size: 300%;
+}
+
+.icon-image(@img) {
+  background-image: url('../../assets/@{img}.png');
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: contain;
+}
+.status-image(@img) {
+  background-image: url('../../assets/@{img}.gif');
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: contain;
+}
+
