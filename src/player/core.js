@@ -65,7 +65,6 @@ export function coreMixin (Player) {
     if (index < 0) {
       index = this.playList.length - 1
     }
-    // this.playing = this.playList[index]
     this.play(this.playList[index])
   }
   /**
@@ -83,7 +82,6 @@ export function coreMixin (Player) {
       tempIndex = 0
     }
     if (index !== tempIndex) {
-      // this.playing = this.playList[index]
       this.play(this.playList[tempIndex])
     } else {
       this.options.currentTime = 0
