@@ -82,7 +82,6 @@ export function coreMixin (Player) {
     if (tempIndex < 0) {
       tempIndex = 0
     }
-    console.log('顺序播放', index, tempIndex)
     if (index !== tempIndex) {
       // this.playing = this.playList[index]
       this.play(this.playList[tempIndex])
