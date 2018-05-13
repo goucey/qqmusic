@@ -10,6 +10,6 @@ initMixin(QQMusic)
 coreMixin(QQMusic)
 eventMixin(QQMusic)
 
-QQMusic.Version = '1.0.0.0'
+QQMusic.Version = '1.0.0.1'
 
 export default QQMusic

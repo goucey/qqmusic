@@ -4,6 +4,9 @@
 
 const path = require('path')
 
+const strPath = process.env.NODE_TEST === 'build'
+  ? '../dist/'
+  : '../test/'
 module.exports = {
   dev: {
 
@@ -45,11 +48,13 @@ module.exports = {
 
   build: {
     // Template for index.html
-    index: path.resolve(__dirname, '../dist/index.html'),
+    index: path.resolve(__dirname, `${strPath}index.html`),
 
     // Paths
-    assetsRoot: path.resolve(__dirname, '../dist'),
-    assetsSubDirectory: 'static',
+    assetsRoot: path.resolve(__dirname, `${strPath}`),
+    assetsSubDirectory: process.env.NODE_TEST === 'build'
+      ? 'static'
+      : 'website/music/static',
     assetsPublicPath: '/',
 
     /**

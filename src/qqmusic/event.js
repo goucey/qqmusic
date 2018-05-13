@@ -4,7 +4,7 @@
  * @Email: gaoxi0004@163.com
  * @Date: 2018-04-16 12:45:31
  * @Last Modified by: Goucey（高希）
- * @Last Modified time: 2018-05-09 19:29:20
+ * @Last Modified time: 2018-05-13 11:33:07
  */
 
 import { isFunction } from '../util/lang'
@@ -28,7 +28,7 @@ export function eventMixin (QQMusic) {
             songid: res.data.song.list[i].id,
             songmid: res.data.song.list[i].mid,
             songname: res.data.song.list[i].name,
-            singer: res.data.song.list[i].singer[0].name,
+            singer: this._getSinger(res.data.song.list[i], res.data.song.list[i].name),
             interval: res.data.song.list[i].interval
           })
         }
@@ -84,7 +84,7 @@ export function eventMixin (QQMusic) {
             songid: res.songlist[i].data.songid,
             songmid: res.songlist[i].data.songmid,
             songname: res.songlist[i].data.songname,
-            singer: res.songlist[i].data.singer[0].name,
+            singer: this._getSinger(res.songlist[i].data, res.songlist[i].data.songname),
             interval: res.songlist[i].data.interval
           })
         }
@@ -92,6 +92,13 @@ export function eventMixin (QQMusic) {
       } else {
         this.onError('获取巅峰热歌榜失败')
       }
+    }
+  }
+  QQMusic.prototype._getSinger = function (data, name) {
+    if (data.singer) {
+      return data.singer[0].name
+    } else {
+      return name
     }
   }
   /**

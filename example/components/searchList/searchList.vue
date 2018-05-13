@@ -3,7 +3,7 @@
     <div class="search-header">
       <div class="logo">
          <a href="javascript:;">
-          <img src="../../../static/assets/player_logo.png" alt="QQ音乐播放器">
+          <img src="http://webapi.yuzhers.com/api/image/?n=player_logo.png" alt="QQ音乐播放器">
         </a>
       </div>
       <div class="title">{{title}}</div>

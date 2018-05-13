@@ -3,7 +3,7 @@
     <ul class="content">
       <li class="logo">
         <a href="javascript:;">
-          <img src="../../../static/assets/player_logo.png" alt="QQ音乐播放器">
+          <img src="http://webapi.yuzhers.com/api/image/?n=player_logo.png" alt="QQ音乐播放器">
         </a>
       </li>
       <li class="search">
