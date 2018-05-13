@@ -184,6 +184,7 @@ export default {
         // color: @base-fColor;
         &:hover {
           .song-name {
+            padding-right: 100px;
             .song-menu {
               display: block;
             }
@@ -250,7 +251,7 @@ export default {
             position: absolute;
             display: none;
             top: 0;
-            right: 30px;
+            right: 10px;
             font-size: 0;
             .song-menu-status {
               display: inline-block;
