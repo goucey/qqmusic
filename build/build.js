@@ -2,8 +2,8 @@
 require('./check-versions')()
 
 process.env.NODE_ENV = 'production'
-process.env.NODE_TEST = 'build'
-
+const NODE_PACK = process.env.NODE_PACK
+process.env.NODE_PACK = NODE_PACK === 'test' ? 'test' : 'build'
 const ora = require('ora')
 const rm = require('rimraf')
 const path = require('path')
@@ -13,6 +13,7 @@ const config = require('../config')
 const webpackConfig = require('./webpack.prod.conf')
 
 const spinner = ora('building for production...')
+
 spinner.start()
 rm(path.join(config.build.assetsRoot, config.build.assetsSubDirectory), err => {
   if (err) throw err
