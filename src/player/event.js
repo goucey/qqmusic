@@ -13,6 +13,9 @@ export function eventMixin (Player) {
           if (DEFAULT_EVENTS[i] === 'ended') {
             player._autoToggleMusic()
           }
+          if (DEFAULT_EVENTS[i] === 'progress') {
+            player._getLoadProgress()
+          }
           if (isFunction(player.events[DEFAULT_EVENTS[i]])) {
             player.events[DEFAULT_EVENTS[i]](event)
           }

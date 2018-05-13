@@ -63,6 +63,7 @@ export function initMixin (Player) {
       interval: 0,
       albumname: '专辑'
     }
+    this.bufferProgress = 0
     this.events = {}
     this._createPlayer(el)
     this._handleOptions(options)

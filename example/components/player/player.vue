@@ -17,7 +17,7 @@
         <div class="player-music-time">{{music.playing.interval | intervalTime }}</div>
       </div>
      <div class="progress-wrap">
-       <playProgress  :max="music.playing.interval" :current="current"></playProgress>
+       <playProgress @toggleValue="toggleCurrentTime" :buffer="music.bufferProgress" :isDrag ="false"  :max="music.playing.interval" :current="current"></playProgress>
      </div>
     </div>
     <div class="player-other-btn">
@@ -118,6 +118,10 @@ export default {
     // 事件 打开播放列表 （触发playing-list）
     openPlayList () {
       this.$emit('playing-list')
+    },
+    // 设置播放进度
+    toggleCurrentTime (val) {
+      this.current = this.music.options.currentTime = val
     }
   },
   filters: {

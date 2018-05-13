@@ -317,7 +317,7 @@ export default {
   z-index: 999;
   background: @playList-bgColor;
   .play-list-main {
-    height: 88%;
+    height: 86%;
     .play-list-content {
       padding: 0 10px;
       .play-list-item {

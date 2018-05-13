@@ -1,21 +1,26 @@
 <template>
   <div class='header-wrap'>
     <ul class="content">
-      <li class="logo">
+      <li v-if="isShowView" class="logo hidden">
         <a href="javascript:;">
           <img src="http://webapi.yuzhers.com/api/image/?n=player_logo.png" alt="QQ音乐播放器">
         </a>
       </li>
       <li class="search">
         <div class="content">
-          <input v-model="searchMusicName" type="text" name="name" placeholder="歌名、歌手、专辑">
-          <button class="search-btn" @click="searchMusic" >
+          <input v-model="searchMusicName" type="search" name="name" @keypress="searchMusic" title="按[Enter]搜索歌曲" placeholder="歌名、歌手、专辑">
+          <!-- <button class="search-btn" @click="searchMusic" title="[回车]或者点击[我]搜索歌曲" >
             <i class="icon"></i>
-          </button>
+          </button> -->
         </div>
       </li>
-      <li class="hot-top-btns hidden" v-if="isShowView">
-        <button class="hot-top-btn" @click="hotTotList">巅峰热歌榜</button>
+      <li class="hot-top-btns">
+        <button class="hot-top-btn" @click="hotTotList" title="巅峰热歌榜">
+          <span class="hidden">巅峰热歌榜</span>
+          <span v-if="!isShowView" class="btn-line"></span>
+          <span v-if="!isShowView" class="btn-line"></span>
+          <span v-if="!isShowView" class="btn-line"></span>
+        </button>
       </li>
     </ul>
   </div>
@@ -56,10 +61,12 @@ export default {
       this.$emit('hot-top', true)
     },
     // 事件 搜索歌曲事件 （触发search-music）
-    searchMusic () {
-      if (this.searchMusicName) {
-        this.music.search(this.searchMusicName)
-        this.$emit('search-music', this.isShow, this.searchMusicName)
+    searchMusic (event) {
+      if ((event.charCode && event.charCode === 13) || !event.charCode) {
+        if (this.searchMusicName) {
+          this.music.search(this.searchMusicName)
+          this.$emit('search-music', this.isShow, this.searchMusicName)
+        }
       }
     }
   }
@@ -88,11 +95,14 @@ export default {
       z-index: 3;
       flex: 1;
       text-align: center;
+      overflow: hidden;
       .content {
         position: relative;
         margin: 0 auto;
         max-width: 300px;
         input {
+          -webkit-appearance: textfield;
+          -webkit-box-sizing: content-box;
           height: 30px;
           width: 100%;
           padding: 0 35px 0 15px;
@@ -100,6 +110,8 @@ export default {
           font-size: 14px;
           outline: none;
           background: @input-bgColor;
+         .icon-image('search-ico.png',96%, center);
+          background-size: 18px;
           border: 1px solid @base-borderColor;
           color: @base-fColor;
           transition: .8s;
@@ -145,7 +157,7 @@ export default {
       text-align: center;
       .hot-top-btn{
         width: 90px;
-        height: 30px;
+        height: 32px;
         border-radius: 15px;
         font-size: 12px;
         background: @input-bgColor;
@@ -156,6 +168,44 @@ export default {
         cursor: pointer;
         &:hover {
           border: 1px solid @current-color;
+        }
+      }
+    }
+  }
+}
+@media (max-width: 768px) {
+  .header-wrap {
+    .content {
+      .search {
+        .content {
+          input {
+            border-radius: 15px 0 0 15px ;
+          }
+        }
+    }
+      .hot-top-btns {
+        flex: 0 0 50px;
+        width: 50px;
+        .hot-top-btn{
+          width: 45px;
+          border-radius: 0 15px 15px 0;
+          padding: 0 12px 0 6px;
+          &:hover {
+            .btn-line {
+              background: @current-color;
+            }
+          }
+          .btn-line {
+            display: block;
+            margin: 5px 0;
+            height: 1px;
+            line-height: 2px;
+            background: @songInfo-fColor;
+            transition: .5s;
+            &:nth-child(3) {
+              width: 30px;
+            }
+          }
         }
       }
     }

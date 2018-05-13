@@ -1,8 +1,10 @@
 <template>
    <div ref="inner" class="progress-inner" @click.self="changeVolume">
-      <div class="progress-play" @click.self="changeVolume" :style="{width: `${(100 / max) * current}%`}" >
-        <span class="progress-ball" @mousedown="slideVolume"></span>
+      <div class="buffer-progress" @click.self="changeVolume" :style="{width: `${buffer}%`}">
       </div>
+      <div class="progress-play" @click.self="changeVolume" :style="{width: `${(100 / max) * current}%`}" >
+          <span class="progress-ball" @mousedown="slideVolume"></span>
+        </div>
     </div>
 </template>
 
@@ -21,6 +23,14 @@ export default {
     current: {
       trpe: Number,
       default: 0
+    },
+    isDrag: {
+      type: Boolean,
+      default: true
+    },
+    buffer: {
+      type: Number,
+      default: 0
     }
   },
   mounted () {
@@ -37,11 +47,14 @@ export default {
     // 事件 点击设置音量大小 （触发toggleValue）
     changeVolume (event) {
       let [offsetX, parentWidth] = [event.offsetX, this.$refs.inner.offsetWidth]
-      let width = 100 / parentWidth * offsetX
-      this.$emit('toggleValue', (width / 100))
+      let width = 100 / parentWidth * offsetX / 100 * this.max
+      this.$emit('toggleValue', width)
     },
     // 事件 点击滑竿设置音量大小 （触发toggleValue）
     slideVolume (event) {
+      if (!this.isDrag) {
+        return
+      }
       let [prevX, clientX, step, prentWidth, tempVolume] = [-99999, 0, 0, this.$refs.inner.offsetWidth, this.current]
       document.onmousemove = event => {
         clientX = event.clientX
@@ -56,7 +69,7 @@ export default {
         }
         if (tempVolume > this.max) {
           tempVolume = this.max
-        } else if (this.current < 0) {
+        } else if (tempVolume <= 0) {
           tempVolume = 0
         }
         this.$emit('toggleValue', tempVolume)
@@ -91,6 +104,14 @@ export default {
         border-radius: 50%;
         background: @progress-ballColor;
       }
+    }
+    .buffer-progress {
+      position: absolute;
+      top: 0;
+      left: 0;
+      height: 2px;
+      background: @progress-loadColor;
+      transition: .3s ease-out;
     }
   }
 </style>

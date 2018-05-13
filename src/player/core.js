@@ -149,4 +149,13 @@ export function coreMixin (Player) {
         break
     }
   }
+  Player.prototype._getLoadProgress = function () {
+    let timeRanges = this.buffered
+    if (timeRanges.length > 0) {
+      let temp = timeRanges.end(timeRanges.length - 1)
+      this.bufferProgress = Number.parseInt(100 / this.duration * temp)
+    } else {
+      this.bufferProgress = 0
+    }
+  }
 }
